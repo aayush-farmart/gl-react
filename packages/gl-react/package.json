@@ -1,8 +1,8 @@
 {
-  "name": "gl-react",
-  "version": "5.2.0",
+  "name": "@opencollabnexus/gl-react-private",
+  "version": "0.0.1",
   "license": "MIT",
-  "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
+  "author": "",
   "description": "Universal React library, write and compose WebGL shaders, implement complex effects using a descriptive paradigm",
   "keywords": [
     "gl-react",
@@ -11,7 +11,7 @@
     "react",
     "react-component"
   ],
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "files": [
     "src",
     "lib",
@@ -28,10 +28,12 @@
     "react": "*"
   },
   "dependencies": {
+    "expo-modules-core": "^1.2.7",
     "gl-shader": "^4.2.1",
     "invariant": "^2.2.4",
     "ndarray": "^1.0.19",
     "prop-types": "^15.7.2",
+    "react": "^18.2.0",
     "typedarray-pool": "^1.2.0",
     "webgltexture-loader": "2.0.0",
     "webgltexture-loader-ndarray": "2.0.0"

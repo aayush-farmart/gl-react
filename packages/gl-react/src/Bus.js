@@ -2,7 +2,7 @@
 import invariant from "invariant";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Node from "./Node";
+// import Node from "./Node";
 import invariantNoDependentsLoop from "./helpers/invariantNoDependentsLoop";
 import genId from "./genId";
 
@@ -43,13 +43,10 @@ type Props = {|
  * </Surface>
  *
  */
-export default class Bus extends Component<Props, *> {
-  id: number = genId();
-  context: {
-    glParent: Surface | Node,
-    glSurface: Surface,
-  };
-  dependents: Array<Node | Surface> = [];
+export default class Bus extends Component {
+  id = genId();
+  context
+  dependents = [];
 
   static defaultProps = {
     index: 0,
@@ -69,7 +66,7 @@ export default class Bus extends Component<Props, *> {
     if (uniform) {
       const { glParent } = this.context;
       invariant(
-        glParent instanceof Node,
+        glParent,
         'a <Bus uniform=".." /> needs to be inside a Node'
       );
       glParent._addUniformBus(this, uniform, index);
@@ -82,7 +79,7 @@ export default class Bus extends Component<Props, *> {
     if (uniform) {
       const { glParent } = this.context;
       invariant(
-        glParent instanceof Node,
+        glParent,
         'a <Bus uniform=".." /> needs to be inside a Node'
       );
       glParent._removeUniformBus(this, uniform, index);
@@ -94,7 +91,7 @@ export default class Bus extends Component<Props, *> {
     if (uniform && (uniform !== oldUniform || index !== oldIndex)) {
       const { glParent } = this.context;
       invariant(
-        glParent instanceof Node,
+        glParent,
         'a <Bus uniform=".." /> needs to be inside a Node'
       );
       if (oldUniform) glParent._removeUniformBus(this, oldUniform, oldIndex);
@@ -109,16 +106,16 @@ export default class Bus extends Component<Props, *> {
     };
   }
 
-  glNode: ?Node = null;
-  _addGLNodeChild(node: Node) {
+  glNode = null;
+  _addGLNodeChild(node) {
     this.glNode = node;
     this.context.glParent.redraw();
   }
-  _removeGLNodeChild(node: Node) {
+  _removeGLNodeChild(node) {
     this.glNode = null;
   }
 
-  _addDependent(node: Node | Surface) {
+  _addDependent(node) {
     const i = this.dependents.indexOf(node);
     if (i === -1) {
       invariantNoDependentsLoop(this, node);
@@ -126,12 +123,12 @@ export default class Bus extends Component<Props, *> {
     }
   }
 
-  _removeDependent(node: Node | Surface) {
+  _removeDependent(node) {
     const i = this.dependents.indexOf(node);
     if (i !== -1) this.dependents.splice(i, 1);
   }
 
-  getGLRenderableNode(): ?Node {
+  getGLRenderableNode() {
     return this.glNode;
   }
 
